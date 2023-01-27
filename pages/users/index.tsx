@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useSession, getSession } from 'next-auth/react'
 import prisma from "@/prisma"
 import moment from 'moment'
+import DefaultLayout from "@/layout/default-layout"
 
 export const getServerSideProps: GetServerSideProps = async () => {
     const res = await fetch('http://localhost:3000/api/users')
@@ -14,13 +15,15 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 export default function Users (props: any) {
     return (
-        <div className="container px-4">
-            <h1 className="text-3xl font-bold py-4">User List</h1>
+        <DefaultLayout>
+            <div className="container px-4">
+                <h1 className="text-3xl font-bold py-4">User List</h1>
 
-            <ul className="w-3/4">
-                {props.users && props.users.map((user: any) => <User key={user.id} user={user} />)}
-            </ul>
-        </div>
+                <ul className="w-3/4">
+                    {props.users && props.users.map((user: any) => <User key={user.id} user={user} />)}
+                </ul>
+            </div>
+        </DefaultLayout>
     )
 }
 
